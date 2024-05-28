@@ -35,18 +35,30 @@ export class HomePage implements OnInit {
     this.getProducts();
   }
 
+  doRefresh(event) {
+    setTimeout(() => {
+      this.getProducts();
+      event.target.complete();
+    }, 1000);
+  }
+
+  //Obtener Ganancias
+  getProfits() {
+    return this.products.reduce((index, product) => index + product.price * product.soldUnits, 0)
+  }
+
   //Obtener Productos
   getProducts() {
     let path = `users/${this.user().uid}/products`;
     this.loading = true;
 
     let query = [
-      orderBy('soldUnits','desc'),
+      orderBy('soldUnits', 'desc'),
       // where('soldUnits','>',30)
     ];
 
 
-    let sub = this.firebaseSvc.getCollectionData(path,query).subscribe({
+    let sub = this.firebaseSvc.getCollectionData(path, query).subscribe({
       next: (res: any) => {
         console.log(res);
         this.products = res;
@@ -59,12 +71,12 @@ export class HomePage implements OnInit {
   //Agregar o actualizar producto
   async addUpdateProduct(product?: Product) {
 
-  let success = await  this.utilsSvc.presentModal({
+    let success = await this.utilsSvc.presentModal({
       component: AddUpdateProductComponent,
       cssClass: 'add-update-modal',
       componentProps: { product }
     })
-    if(success) this.getProducts();
+    if (success) this.getProducts();
   }
 
   //Confirmar eliminación del Producto
