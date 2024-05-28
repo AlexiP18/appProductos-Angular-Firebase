@@ -2,6 +2,20 @@
 <ion-content>
   <form [formGroup]="form" class="ion-paddding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
+    <!-- Si existe una imegen -->
+    <ion-avatar *ngIf="form.value.image">
+      <img [src]="form.value.image" />
+    </ion-avatar>
+
+    <!-- Si no existe una imagen -->
+    <ion-icon class="image-icon" *ngIf="!form.value.image" name="image-outline"></ion-icon>
+
+    <br>
+      <!-- Tomar o seleccionar una imagen -->
+    <ion-button (click)="takeImage()" mode="ios" size="small" shape="round">
+      Tomar/Seleccionar
+    </ion-button>
+
     <!-- Name -->
     <app-custom-input
     autocomplete="name"

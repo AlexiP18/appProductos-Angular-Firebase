@@ -25,6 +25,12 @@ export class AddUpdateProductComponent  implements OnInit {
   ngOnInit() {
   }
 
+  //Tomar-Seleccionar Imagen
+  async takeImage(){
+    const dataUrl = (await this.utilsSvc.takePicture('Imagen del Producto')).dataUrl;
+    this.form.controls.image.setValue(dataUrl);
+  }
+
   async submit(){
     if(this.form.valid){
       const loading = await this.utilsSvc.loading();
