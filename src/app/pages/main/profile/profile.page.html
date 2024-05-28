@@ -2,9 +2,9 @@
 <ion-content class="ion-padding-top ion-text-center">
 
   <ion-avatar>
-    <img *ngIf="!user()?.image" [src]="user()?.image" />
+    <img *ngIf="user()?.image" [src]="user()?.image" />
 
-    <ion-icon *ngIf="user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
+    <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
   </ion-avatar>
 
   <ion-button class="photo-btn" (click)="takeImage()" mode="ios" size="small" shape="round">
