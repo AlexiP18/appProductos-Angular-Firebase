@@ -53,7 +53,7 @@ export class FirebaseService {
   //************Base de Datos
   getCollectionData(path:string, collectionQuery ?: any){
     const ref = collection(getFirestore(), path)
-    return collectionData(query(ref,collectionQuery), {idField: 'id'});
+    return collectionData(query(ref,...collectionQuery), {idField: 'id'});
   }
 
   //Setear un documento
